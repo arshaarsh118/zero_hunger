@@ -1,0 +1,171 @@
+{% include 'farmer_header.html' %}
+<br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farmersend_complaint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+       
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+        }
+
+        .btn-danger:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        
+        <div class="form-container">
+            <h2 class="form-title">Submit Your Complaint</h2>
+            <form id="complaintForm" action="" method="post" onsubmit="return validateComplaint()">
+                <div class="form-group">
+                    <label for="complaint" class="form-label">Complaint Details:</label>
+                    <textarea 
+                        name="complaint" 
+                        id="complaint" 
+                        class="form-control" 
+                        placeholder="Please describe your complaint in detail..."
+                    ></textarea>
+                    <small id="error-message" style="color: red; display: none;">Complaint must include at least one letter.</small>
+                </div>
+                <div class="form-group" style="text-align: center;">
+                    <input 
+                        type="submit" 
+                        name="submit" 
+                        value="Submit Complaint" 
+                        class="btn btn-danger"
+                    >
+                </div>
+            </form>
+        </div>
+        
+        <script>
+            function validateComplaint() {
+                var complaintText = document.getElementById("complaint").value.trim();
+                var errorMessage = document.getElementById("error-message");
+        
+                // Regular expression to check if the complaint contains at least one letter
+                var regex = /[a-zA-Z]/;
+        
+                if (!regex.test(complaintText)) {
+                    errorMessage.style.display = "block";
+                    return false;
+                } else {
+                    errorMessage.style.display = "none";
+                    return true;
+                }
+            }
+        </script>
+        
+
+        <br><br>
+ 
+        <div class="container mt-4">
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for i in data['view'] %}
+                <div class="card text-white bg-dark m-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Complaint Date: {{ i['complaint_date'] }}</h5>
+                        <p class="card-text">
+                            <strong>Complaint:</strong> {{ i['complaint'] }}<br>
+                            <strong>Reply:</strong> {{ i['reply'] }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
+

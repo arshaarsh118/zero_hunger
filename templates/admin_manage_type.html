@@ -1,0 +1,153 @@
+{% include 'admin_header.html' %}
+<br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Manage Type</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table, th, td {
+            border: 1px solid #444;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ddd9d2;
+            color: #121212;
+        }
+
+        td {
+            color: #dddddd;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        input[type="submit"] {
+            background-color: #cda45e;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #cda45e;
+        }
+
+        a {
+            text-decoration: none;
+            color: #cda45e;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #cda45e;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            input[type="text"] {
+                font-size: 0.9rem;
+            }
+
+            input[type="submit"] {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        {% if data['up'] %}
+        
+        <form action="" method="post">
+            <table>
+                <h3>UPDATE SHELTER TYPE</h3>
+                <tr>
+                    <td><input type="text" name="type" id="" placeholder="Shelter type" value="{{data['up'][0]['shelter_type']}}"></td>
+                </tr>
+                <tr class="center">
+                    <td><input type="submit" name="update" id="" value="UPDATE"></td>
+                </tr>
+            </table>
+        </form>
+
+        {% else %}
+        
+        <form action="" method="post">
+            
+            <table>
+                <h3>SHELTER TYPE</h3>
+                <tr>
+                    <td><input type="text" name="type" id="" placeholder="Shelter type"></td>
+                </tr>
+                <tr class="center">
+                    <td><input type="submit" name="submit" id="" value="SUBMIT"></td>
+                </tr>
+            </table>
+        </form>
+
+        <table>
+            <tr>
+                <th>Shelter Type</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for i in data['view'] %}
+            <tr>
+                <td>{{i['shelter_type']}}</td>
+                <td><a href="?action=update&id={{i['type_id']}}">Update</a></td>
+                <td><a href="?action=delete&id={{i['type_id']}}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </center>
+</body>
+</html>

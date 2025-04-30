@@ -1,0 +1,32 @@
+{% include 'shelter_header.html' %}
+<br><br><br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shelter_view_order</title>
+</head>
+<body>
+    <center>
+        <h2>YOUR ORDERS</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i['item_name']}}</h5>
+                        <p class="card-text"><strong>Quantity:</strong> {{i['surplus_qty_details']}} Kg</p>
+                        <!-- <p class="card-text"><strong>Amount:</strong> {{i['item_price']}}</p>
+                        <p class="card-text"><strong>Total:</strong> {{i['od_amount']}}</p> -->
+                        <p class="card-text"><strong>Status:</strong> {{i['surplus_req_status']}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

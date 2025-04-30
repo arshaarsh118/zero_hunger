@@ -1,0 +1,123 @@
+{% include 'admin_header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin View Shelter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #ffc107;
+            margin-bottom: 30px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffc107;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #dddddd;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #121212;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ffcd39;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h2>REGISTERED FOOD SHELTERS</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-4 mb-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i['shelter_name'] }}</h5>
+                        <p class="card-text">Shelter Type: {{ i['shelter_type'] }}</p>
+                        <p class="card-text">Phone: {{ i['shelter_phone'] }}</p>
+                        <p class="card-text">Email: {{ i['shelter_email'] }}</p>
+                        <p class="card-text">Address: {{ i['shelter_address'] }}</p>
+                        <p class="card-text">Capacity: {{ i['shelter_capacity'] }}</p>
+                        <p class="card-text">Place: {{ i['shelter_place'] }}</p>
+                        <p class="card-text">Pincode: {{ i['shelter_pincode'] }}</p>
+                        <p class="card-text">District: {{ i['shelter_district'] }}</p>
+                        {% if i['usertype']=='pending'%}
+                        <button class="btn"><a href="?action=accept&id={{i['login_id']}}">Approve</a></button>
+                        <button class="btn"><a href="?action=reject&id={{i['login_id']}}">Reject</a></button>
+
+                        {% elif i['usertype']=='shelter'%}
+                    
+                        Accepted
+                        <button class="btn"><a href="?action=reject&id={{i['login_id']}}">Reject</a></button>
+                        {% elif i['usertype']=='rejected'%}
+                        <button class="btn"><a href="?action=accept&id={{i['login_id']}}">Approve</a></button>
+                        Rejected
+                        
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

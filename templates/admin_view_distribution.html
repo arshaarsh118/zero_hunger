@@ -1,0 +1,55 @@
+{% include 'admin_header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin_view_distribution</title>
+</head>
+<body>
+    <center>
+        <h2>DISTRIBUTION TEAM</h2>
+        <table border="1" class="table table-dark table-striped" style="width: 50%;">
+            <tr>
+                <tr>
+                    <td>Name</td>
+                    <td>Phone</td>
+                    <td>Email</td>
+                    <td>Place</td>
+                    <td>Pincode</td>
+                    <td>District</td>
+                    <td>Approve Distributor</td>
+                    <td>Reject Distributor</td>
+                </tr>
+                {% for i in data['view'] %}
+                <tr>
+                    <td>{{i['distributor_name']}}</td>
+                    <td>{{i['distributor_phone']}}</td>
+                    <td>{{i['distributor_email']}}</td>
+                    <td>{{i['distributor_place']}}</td>
+                    <td>{{i['distributor_pincode']}}</td>
+                    <td>{{i['distributor_district']}}</td>
+                    
+                    {% if i['usertype']=='pending'%}
+                    <td><button class="btn btn-dark"><a href="?action=accept&id={{i['login_id']}}">Approve</a></button></td>
+                    <td><button class="btn btn-dark"><a href="?action=reject&id={{i['login_id']}}">Reject</a></button></td>
+
+                    {% elif i['usertype']=='distributor'%}
+                    
+                    <td>Accepted</td>
+                    <td><button class="btn btn-dark"><a href="?action=reject&id={{i['login_id']}}">Reject</a></button></td>
+                    {% elif i['usertype']=='rejected'%}
+                    <td><button class="btn btn-dark"><a href="?action=accept&id={{i['login_id']}}">Approve</a></button></td>
+                    <td>Rejected</td>
+                    
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tr>
+        </table>
+       
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

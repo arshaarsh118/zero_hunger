@@ -1,0 +1,89 @@
+{% include 'distributor_header.html'%}
+<br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>distributor_add_surplus</title>
+</head>
+<body>
+    <center>
+        <h2>ADD SURPLUS FOOD</h2>
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <td>Food Item:</td>
+                    <td><select name="item" class="form-control" required>
+                        {% for i in data['view'] %}
+                        <option value="{{i['item_id']}}">{{i['item_name']}}</option>
+                        {% endfor %}
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Quantity:</td>
+                    <td><input type="text" name="quantity" class="form-control" required pattern="[0-9]+" title="Quantity must be a number"></td>
+                </tr>
+                <tr>
+                    <td>Package Type:</td>
+                    <td>
+                        <select name="type" id="" class="form-control">
+                            <option value="Aseptic Packaging"> Aseptic Packaging(Eg: Milk cartons, juice boxes, soup pouches.)</option>
+                            <option value="Vacuum Packaging"> Vacuum Packaging(Eg; Packaged meats, cheese, coffee bags.)</option>
+                            <option value="Rigid Packaging"> Rigid Packaging(Eg:  Glass jars, plastic containers, metal cans.)</option>
+                            <option value="Modified Atmosphere Packaging ">Modified Atmosphere Packaging (Eg: Fresh-cut salads, packaged fruits.)</option>
+                           
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Expiration Date:</td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Storage Requirement:</td>
+                    <td><input type="text" name="requirement" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Supplier Name:</td>
+                    <td><input type="text" name="name" class="form-control"></td>
+                </tr>
+                <tr>
+                    <td>Supplier Phone:</td>
+                    <td><input type="text" name="phone" class="form-control" pattern="[0-9]{10}" title="Phone number must be 10 digits"></td>
+                </tr>
+                <tr>
+                    <td>Supplier Location:</td>
+                    <td><input type="text" name="location" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <td><input type="submit" name="submit" value="submit" class="btn btn-danger"></td>
+                    </th>
+                </tr>
+            </table>
+        </form>
+       
+        <div class="row">
+            {% for i in data1['view'] %}
+            <div class="col-md-4 mb-4">
+                <div class="card text-white bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Item: {{ i['item_name'] }}</h5>
+                        <p class="card-text">Quantity: {{ i['quantity_details'] }}</p>
+                        <p class="card-text">Package: {{ i['package_type'] }}</p>
+                        <p class="card-text">Expiry Date: {{ i['expiration_date'] }}</p>
+                        <p class="card-text">Storage: {{ i['storage_requirement'] }}</p>
+                        <p class="card-text">Supplier Name: {{ i['supplier_name'] }}</p>
+                        <p class="card-text">Supplier Phone: {{ i['supplier_phone'] }}</p>
+                        <p class="card-text">Storage Location: {{ i['storage_location'] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

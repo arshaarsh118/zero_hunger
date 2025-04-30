@@ -1,0 +1,50 @@
+{% include 'distributor_header.html'%}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>distributor_view_req</title>
+    
+</head>
+<body>
+    <center>
+        {% if data['view'] %}
+        <h2>SURPLUS FOOD REQUEST</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-6 mb-4">
+                <div class="card text-white bg-dark">
+                    <div class="card-body">
+                        <h5 class="card-title">Shelter: {{ i['shelter_name'] }}</h5>
+                        <p class="card-text">Contact: {{ i['shelter_phone'] }}</p>
+                        <p class="card-text">Food Item: {{ i['item_name'] }}</p>
+                        <p class="card-text">Quantity: {{ i['surplus_qty_details'] }}</p>
+                        <p class="card-text">Date: {{ i['surpls_req_datetime'] }}</p>
+                        <div class="d-flex justify-content-between">
+                            {% if i['surplus_req_status'] == 'pending' %}
+                                <a href="?action=accept&id={{ i['request_id'] }}" class="btn btn-success">Approve</a>
+                                <a href="?action=reject&id={{ i['request_id'] }}" class="btn btn-danger">Reject</a>
+                            {% elif i['surplus_req_status'] == 'accept' %}
+                                <span class="badge bg-success">ACCEPTED</span>
+                                <a href="?action=reject&id={{ i['request_id'] }}" class="btn btn-danger">Reject</a>
+                            {% elif i['surplus_req_status'] == 'rejected' %}
+                                <a href="?action=accept&id={{ i['request_id'] }}" class="btn btn-success">Approve</a>
+                                <span class="badge bg-danger">REJECTED</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        {% else %}
+        <h2>NO REQUEST</h2>
+        {% endif %}
+       
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

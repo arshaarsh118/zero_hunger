@@ -1,0 +1,271 @@
+{%include 'committee_header.html'%}
+<br><br><br><br><br><br><br><br>
+{% if data['view'] %}
+<div class="container">
+    <div class="sub-wrapper">
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="card shadow-sm h-100">
+                    <!-- Card Header with Event Team -->
+                    <div class="card-header text-left">
+                        <h5 class="card-title text-primary"><i class="bi bi-people-fill"></i> {{ i['event_team_name'] }}</h5>
+                    </div>
+
+                    <!-- Card Body with Event Details -->
+                    <div class="card-body text-left text-dark">
+                        <!-- Date and Duration -->
+                        <p><i class="bi bi-calendar-event"></i> <strong>Date:</strong> {{ i['date'] }}</p>
+                        <p><i class="bi bi-clock"></i> <strong>Duration:</strong> {{ i['duration'] }}</p>
+
+                        <!-- Amount and Advance Amount -->
+                        <p><i class="bi bi-cash-stack"></i> <strong>Amount:</strong> {{ i['amount'] }} <br>
+                           <i class="bi bi-cash-coin"></i> <strong>Advance Amount:</strong> {{ i['advance_amount'] }}</p>
+
+                        <!-- Place and Landmark -->
+                        <p><i class="bi bi-geo-alt-fill"></i> <strong>Place:</strong> {{ i['place'] }} <br>
+                           <i class="bi bi-signpost-split"></i> <strong>Landmark:</strong> {{ i['landmark'] }}</p>
+
+                        <!-- Status -->
+                        <p><i class="bi bi-check-circle"></i> <strong>Status:</strong> {{ i['status'] }}</p>
+                    </div>
+
+                    <!-- Card Footer with Action Button -->
+                    <!-- <div class="card-footer text-left">
+                        {% if i['advance_amount'] != 'pending' %}
+                            <a href="#" onclick="openModal('{{i.event_booking_id}}', '{{i.advance_amount}}', '{{i.amount}}')" class="btn btn-success btn-sm">
+                                <i class="bi bi-credit-card"></i> Pay
+                            </a>
+                        {% endif %}
+                    </div> -->
+                </div>
+            </div>
+            {% endfor %}
+            <div class="card-footer text-left">
+                {% if i['advance_amount'] != 'pending' %}
+                    <a href="#" onclick="openModal('{{data.event_booking_id}}', '{{i.advance_amount}}', '{{i.amount}}')" class="btn btn-success btn-sm">
+                        <i class="bi bi-credit-card"></i> Pay
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endif%}
+<br><br><br><br><br>
+
+<!-- Add this modal HTML just before the closing body tag -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 class="text-primary">Payment Details</h2>
+        <form id="paymentForm" action="/distributor_payment" method="post">
+            <div class="form-group">
+                <label for="cardNumber" class="text-dark">Card Number:</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiry" class="text-dark">Expiry Date:</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="cvv" class="text-dark">CVV:</label>
+                    <input type="password" id="cvv" placeholder="123" maxlength="3" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="text-dark">Cardholder Name:</label>
+                <input type="text" id="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="payment-summary">
+                <h3 class="text-primary">Payment Summary</h3>
+                <p class="text-dark">Amount: $<span id="totalAmount">0</span></p>
+                <p class="text-dark">Advance Paid: $<span id="advanceAmount">0</span></p>
+                <!-- <p class="text-dark">Balance: $<span id="balanceAmount">0</span></p> -->
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button type="submit" name="submit" class="pay-btn">Pay Now</button>
+
+                <input type="hidden" name="event_book_id" id="event_book_id">
+                <input type="hidden" name="adv_amount" id="adv_amount">
+                <input type="hidden" name="tot_amt" id="tot_amt">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    // Add this to handle the modal functionality
+    const modal = document.getElementById('paymentModal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    
+    
+
+    function openModal(event_booking_id, advance_amount,tot_amount) {
+    document.getElementById('paymentModal').style.display = 'block';
+    document.getElementById('event_book_id').value = event_booking_id;
+    document.getElementById('adv_amount').value = advance_amount;
+    document.getElementById('tot_amt').value = tot_amount;
+
+    document.getElementById('advanceAmount').textContent = advance_amount;
+    document.getElementById('totalAmount').textContent = tot_amount;
+
+    
+    
+    // Add this to check the values
+    console.log('Stored event_book_id:', document.getElementById('event_book_id').value);
+    console.log('Stored adv_amount:', document.getElementById('adv_amount').value);
+    }
+    
+    // Function to close modal
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    
+    // Handle form submission
+    // document.getElementById('paymentForm').onsubmit = function(e) {
+    //     e.preventDefault();
+    //     // Add your payment processing logic here
+    //     alert('Payment processing...');
+    //     closeModal();
+    // }
+    
+    // Modify your existing table pay links to use this
+    // Replace your existing <a href="">pay</a> with:
+    // <a onclick="openModal('amount', 'advance_amount')" class="pay-link">pay</a>
+    </script>
+{%include 'footer.html'%}
+
+
+
+
+<style>
+    /* Modal styles */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+    
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        /* margin: 15% auto; */
+        margin: auto;
+        padding: 20px;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 5px;
+        margin-top: 65px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    
+    .close {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #666;
+    }
+    
+    .close:hover {
+        color: #000;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .form-row .form-group {
+        flex: 1;
+    }
+    
+    .payment-summary {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+    }
+    
+    .payment-summary h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .cancel-btn, .pay-btn {
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+    }
+    
+    .cancel-btn {
+        background-color: #eee;
+    }
+    
+    .pay-btn {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    .pay-btn:hover {
+        background-color: #0056b3;
+    }
+    
+    /* Add this to your existing table styles */
+    .pay-link {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    </style>
+    

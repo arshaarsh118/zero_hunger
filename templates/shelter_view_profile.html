@@ -1,0 +1,96 @@
+{% include 'shelter_header.html' %}
+<br><br><br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <center>
+        
+        {% if data['up'] %}
+        <h2>Update Profile</h2>
+        <form action="" method="post">
+            <table>
+                
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" class="form-control" value="{{data['up'][0]['shelter_name']}}"></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type="text" name="phone" class="form-control" value="{{data['up'][0]['shelter_phone']}}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="email" class="form-control" value="{{data['up'][0]['shelter_email']}}"></td>
+                </tr>
+                <tr>
+                    <td>Address:</td>
+                    <td><input type="text" name="address" class="form-control" value="{{data['up'][0]['shelter_address']}}"></td>
+                </tr>
+                <tr>
+                    <td>Capacity:</td>
+                    <td><input type="text" name="capacity" class="form-control" value="{{data['up'][0]['shelter_capacity']}}"></td>
+                </tr>
+                <tr>
+                    <td>Place:</td>
+                    <td><input type="text" name="place" class="form-control" value="{{data['up'][0]['shelter_place']}}"></td>
+                </tr>
+                <tr>
+                    <td>Pincode:</td>
+                    <td><input type="text" name="pincode" class="form-control" value="{{data['up'][0]['shelter_pincode']}}"></td>
+                </tr>
+                <tr>
+                    <td>District:</td>
+                    <td><input type="text" name="dis" class="form-control" value="{{data['up'][0]['shelter_district']}}"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <td><input type="submit" name="update" value="update" class="btn btn-danger"></td>
+                    </th>
+                </tr>
+            </table>
+        </form>
+        {% else %}
+        <h2>Your Profile</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    {% for i in data['view'] %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="card-title">{{i['shelter_name']}}</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Shelter Type:</strong> {{i['shelter_type']}}</p>
+                                <p><strong>Phone:</strong> {{i['shelter_phone']}}</p>
+                                <p><strong>Email:</strong> {{i['shelter_email']}}</p>
+                                <p><strong>Address:</strong> {{i['shelter_address']}}</p>
+                                <p><strong>Capacity:</strong> {{i['shelter_capacity']}}</p>
+                                <p><strong>Place:</strong> {{i['shelter_place']}}</p>
+                                <p><strong>Pincode:</strong> {{i['shelter_pincode']}}</p>
+                                <p><strong>District:</strong> {{i['shelter_district']}}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button class="btn btn-dark"><a href="?action=update&id={{i['shelter_id']}}" class="text-white">Edit</a></button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+        
+        {% endif %}
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

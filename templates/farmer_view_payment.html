@@ -1,0 +1,62 @@
+{% include 'farmer_header.html' %}
+<br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farmer_view_payment</title>
+</head>
+<body>
+    <center>
+        <h2>Payment History</h2>
+        <div class="card-deck">
+            {% for i in data['view'] %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{i['item_name']}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Amount:</strong> {{i['op_amount']}}</p>
+                    <p class="card-text"><strong>Date:</strong> {{i['op_datetime']}}</p>
+                    <p class="card-text"><strong>Status:</strong> {{i['op_status']}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Optionally include these classes for better layout with Bootstrap -->
+        <style>
+            .card-deck {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .card {
+                width: 18rem;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .card-header {
+                background-color: #343a40;
+                color: white;
+                padding: 0.75rem;
+                border-radius: 8px 8px 0 0;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .card-title {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+            .card-text {
+                font-size: 1rem;
+            }
+        </style>
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

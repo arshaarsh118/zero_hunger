@@ -1,0 +1,32 @@
+{% include 'distributor_header.html'%}
+<br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>distributor_search_item</title>
+</head>
+<body>
+    <center>
+        <h2>ITEMS</h2>
+        <table border="1" class="table table-dark table-striped">
+            <tr>
+                <td>Item</td>
+                <td>Price</td>
+                <td>Stock</td>
+                <td>Cart</td>
+            </tr>
+            {% for i in data['view'] %}
+            <tr>
+                <td>{{i['item_name']}}</td>
+                <td>{{i['item_price']}}</td>
+                <td>{{i['farmer_item_stock']}}</td>
+                <td><button class="btn btn-dark"><a href="/distributor_add_to_cart?id={{i['item_id']}} &amount={{i['item_price']}} &stock={{i['farmer_item_stock']}}">Add To Cart</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

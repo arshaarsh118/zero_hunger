@@ -1,0 +1,132 @@
+{% include 'public_header.html' %}
+<br><br><br><br><br>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributor Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #ffcc00;
+        }
+        table {
+            width: 100%;
+        }
+        table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #2c2c2c;
+            color: #ffffff;
+        }
+        input:focus {
+            outline: none;
+            border-color: #ffcc00;
+        }
+        .btn-warning {
+            background-color: #ffcc00;
+            border: none;
+            color: #121212;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-warning:hover {
+            background-color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <center>
+            <h2>Distributor Registration</h2>
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><input type="text" name="name" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><input type="text" name="phone" class="form-control" pattern="[0-9]{10}" title="Phone number must be 10 digits"></td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td> 
+                        <td><input type="email" name="email" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Place:</td>
+                        <td><input type="text" name="place" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Pincode:</td>
+                        <td><input type="text" name="pincode" class="form-control" required pattern="[0-9]{6}" title="Pincode must be 6 digits"></td>
+                    </tr>
+                    <tr>
+                        <td>District:</td>
+                        <td>
+                            <select name="district" id="" class="form-control">
+                                <option value="">---Select District---</option>
+                                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                                <option value="Kollam">Kollam</option>
+                                <option value="Pathanamthitta">Pathanamthitta</option>
+                                <option value="Alappuzha">Alappuzha</option>
+                                <option value="Kottayam">Kottayam</option>
+                                <option value="Idukki">Idukki</option>
+                                <option value="Ernakulam">Ernakulam</option>
+                                <option value="Thrissur">Thrissur</option>
+                                <option value="Palakkad">Palakkad</option>
+                                <option value="Malappuram">Malappuram</option>
+                                <option value="Kozhikode">Kozhikode</option>
+                                <option value="Wayanad">Wayanad</option>
+                                <option value="Kannur">Kannur</option>
+                                <option value="Kasaragod">Kasaragod</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User Name:</td>
+                        <td><input type="text" name="uname" class="form-control" required></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" class="form-control" required minlength="6" title="Password must be at least 6 characters"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="submit" name="submit" value="Submit" class="btn btn-warning">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </center>
+    </div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

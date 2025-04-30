@@ -1,0 +1,35 @@
+{% include 'admin_header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin_view_surplus</title>
+</head>
+<body>
+    <center>
+        <h2>SURPLUS FOOD</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-4 mb-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Item: {{ i['item_name'] }}</h5>
+                        <p class="card-text">Price: {{ i['item_price'] }}</p>
+                        <p class="card-text">Quantity: {{ i['quantity_details'] }}</p>
+                        <p class="card-text">Package Type: {{ i['package_type'] }}</p>
+                        <p class="card-text">Expiration Date: {{ i['expiration_date'] }}</p>
+                        <p class="card-text">Storage Requirement: {{ i['storage_requirement'] }}</p>
+                        <p class="card-text">Supplier Name: {{ i['supplier_name'] }}</p>
+                        <p class="card-text">Supplier Phone: {{ i['supplier_phone'] }}</p>
+                        <p class="card-text">Storage Location: {{ i['storage_location'] }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

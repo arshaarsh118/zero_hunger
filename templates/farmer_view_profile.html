@@ -1,0 +1,183 @@
+{% include 'farmer_header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>farmer_view_profile</title>
+
+        <!-- Add Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    
+</head>
+<body>
+    <center>
+       
+
+        {% if data['up'] %}
+        <h2>Update Your Profile</h2>
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <td>Full Name:</td>
+                    <td><input type="text" name="fname" class="form-control" value="{{data['up'][0]['farmer_name']}}"></td>
+                </tr>
+                <tr>
+                    <td>Place:</td>
+                    <td><input type="text" name="place" class="form-control"value="{{data['up'][0]['farmer_place']}}"></td>
+                </tr>
+                <tr>
+                    <td>Pincode:</td>
+                    <td><input type="pin" name="pin" class="form-control" value="{{data['up'][0]['farmer_pincode']}}"></td>
+                </tr>
+                <tr>
+                    <td>Date Of Birth:</td>
+                    <td><input type="date" name="dob" class="form-control" value="{{data['up'][0]['farmer_dob']}}"></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type="text" name="phone" class="form-control" value="{{data['up'][0]['farmer_phone']}}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" name="email" class="form-control" value="{{data['up'][0]['farmer_email']}}"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <td><input type="submit" name="update" value="update" class="btn btn-danger"></td>
+                    </th>
+                </tr>
+            </table>
+        </form>
+        {% else %}
+        <h2 class="text-center mb-5 text-white">Your Profile</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        {% for i in data['view'] %}
+        <div class="col-md-6 mb-4">
+            <div class="card bg-gradient-to-r from-darkblue-500 via-darkblue-700 to-darkblue-800 text-white shadow-lg rounded-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">
+                        <i class="fas fa-user-circle fa-3x"></i><br>
+                        <strong>{{i['farmer_name']}}</strong>
+                    </h5>
+                    <table class="table table-borderless text-white">
+                        <tbody>
+                            <tr>
+                                <td><strong><i class="fas fa-map-marker-alt"></i> Place:</strong></td>
+                                <td>{{i['farmer_place']}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-mail-bulk"></i> Pincode:</strong></td>
+                                <td>{{i['farmer_pincode']}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-birthday-cake"></i> Date of Birth:</strong></td>
+                                <td>{{i['farmer_dob']}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-phone"></i> Phone:</strong></td>
+                                <td>{{i['farmer_phone']}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-envelope"></i> Email:</strong></td>
+                                <td>{{i['farmer_email']}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center mt-4">
+                        <a href="?action=update&id={{i['farmer_id']}}" class="btn btn-warning btn-lg text-dark rounded-pill shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Card Styles */
+    .card {
+        background: linear-gradient(135deg, #2c3e50, #34495e); /* Gradient background */
+        border-radius: 20px; /* Smooth rounded corners */
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Soft shadow */
+        transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+    }
+
+    .card:hover {
+        transform: translateY(-8px); /* Slight lift effect */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    }
+
+    /* Title Styling */
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #f1c40f; /* Gold color for the title */
+    }
+
+    .card-title i {
+        font-size: 3rem; /* Larger icon */
+        color: #f39c12; /* Gold icon color */
+    }
+
+    /* Table Styling */
+    .table {
+        color: #ecf0f1; /* Light text for readability */
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .table td {
+        padding: 12px 20px; /* Adjust cell padding */
+        vertical-align: middle;
+    }
+
+    .table td:first-child {
+        width: 35%; /* Adjust width for labels */
+        font-weight: 500;
+    }
+
+    /* Button Styling */
+    .btn-warning {
+        font-size: 1rem;
+        padding: 12px 25px;
+        border-radius: 30px; /* Fully rounded button */
+        background-color: #f39c12;
+        color: white;
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+    .btn-warning:hover {
+        background-color: #e67e22; /* Darker yellow on hover */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-warning i {
+        margin-right: 8px;
+    }
+
+    /* Responsive Title */
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+</style>
+
+        
+        
+        
+        
+        {% endif %}
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

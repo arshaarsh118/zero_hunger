@@ -1,0 +1,39 @@
+{% include 'shelter_header.html' %}
+<br><br><br><br><br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shelter_view_surplus</title>
+</head>
+<body>
+    <center>
+        <h2>SURPLUS FOOD</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i['item_name']}}</h5>
+                        <p class="card-text"><strong>Quantity:</strong> {{i['quantity_details']}}</p>
+                        <p class="card-text"><strong>Package:</strong> {{i['package_type']}}</p>
+                        <p class="card-text"><strong>Expiry Date:</strong> {{i['expiration_date']}}</p>
+                        <p class="card-text"><strong>Storage:</strong> {{i['storage_requirement']}}</p>
+                        <p class="card-text"><strong>Supplier:</strong> {{i['supplier_name']}}</p>
+                        <p class="card-text"><strong>Supplier Phone:</strong> {{i['supplier_phone']}}</p>
+                        <p class="card-text"><strong>Storage Location:</strong> {{i['storage_location']}}</p>
+                        
+                        {% if i['expiration_date']|string >= current_date %}
+                            <a href="/shelter_send_req?id={{i['surplus_id']}}&surplus_qty={{i['quantity_details']}}" class="btn btn-dark">Place Order</a>
+                        {% else %}
+                            <p class="text-danger"><strong>This item has expired</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+</body>
+</html>

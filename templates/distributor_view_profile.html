@@ -1,0 +1,73 @@
+{% include 'distributor_header.html'%}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>distributor_view_profile</title>
+</head>
+<body>
+    <center>
+        <h2>YOUR PROFILE</h2>
+        {% if data['up'] %}
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" class="form-control" value="{{data['up'][0]['distributor_name']}}"></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type="text" name="phone" class="form-control" value="{{data['up'][0]['distributor_phone']}}"></td>
+                </tr>
+                <tr>
+                    <td>E mail:</td>
+                    <td><input type="email" name="email" class="form-control" value="{{data['up'][0]['distributor_email']}}"></td>
+                </tr>
+                <tr>
+                    <td>Place:</td>
+                    <td><input type="text" name="place" class="form-control" value="{{data['up'][0]['distributor_place']}}"></td>
+                </tr>
+                <tr>
+                    <td>Pincode:</td>
+                    <td><input type="text" name="pincode" class="form-control" value="{{data['up'][0]['distributor_pincode']}}"></td>
+                </tr>
+                <tr>
+                    <td>District:</td>
+                    <td><input type="text" name="district" class="form-control" value="{{data['up'][0]['distributor_district']}}"></td>
+                </tr>
+                <tr>
+                    <th>
+                        <td><input type="submit" name="update" value="Update" class="btn btn-danger"></td>
+                    </th>
+                </tr>
+            </table>
+        </form>
+        {% else %}
+        <div class="container mt-4">
+            <div class="d-flex flex-wrap justify-content-center">
+                {% for i in data['view'] %}
+                <div class="card text-white bg-dark m-2" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i['distributor_name'] }}</h5>
+                        <p class="card-text">
+                            <strong>Phone:</strong> {{ i['distributor_phone'] }}<br>
+                            <strong>Email:</strong> {{ i['distributor_email'] }}<br>
+                            <strong>Place:</strong> {{ i['distributor_place'] }}<br>
+                            <strong>Pincode:</strong> {{ i['distributor_pincode'] }}<br>
+                            <strong>District:</strong> {{ i['distributor_district'] }}
+                        </p>
+                        <a href="?action=update&id={{ i['distributor_id'] }}" class="btn btn-light btn-sm">Edit Your Profile</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        
+        {% endif %}
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>

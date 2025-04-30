@@ -1,0 +1,38 @@
+{% include 'admin_header.html' %}
+<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin_view_complaint</title>
+</head>
+<body>
+    <center>
+        {% if data['view'] %}
+        <h2>COMPLAINTS</h2>
+        <div class="row">
+            {% for i in data['view'] %}
+            <div class="col-md-4 mb-3">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Complaint from: {{ i['username'] }}</h5>
+                        <p class="card-text">Date: {{ i['complaint_date'] }}</p>
+                        <p class="card-text">Complaint: {{ i['complaint'] }}</p>
+                        <p class="card-text">Reply: {{ i['reply'] }}</p>
+                        {% if i['reply'] == 'pending' %}
+                        <a href="/admin_send_reply?id={{i['complaint_id']}}" class="btn btn-primary">Reply</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        No complaints available at the moment.Please check back later for any updates or new submissions.
+        {% endif %}
+        
+    </center>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
